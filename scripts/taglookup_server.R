@@ -3,7 +3,7 @@
 
 tagTable <- eventReactive(input$k, {
   if (input$tagtype == "research"){
-  nova <- odbcConnect("nova", uid="TTS", pwd="m1les0ch5+??",believeNRows=FALSE)
+  nova <- odbcConnect("nova", uid="TTS", pwd="xxxx",believeNRows=FALSE)
 #  novaNew <- DBI::dbConnect(odbc::odbc(), dsn = 'nefscdb1.nmfs.local', uid="TTS", pwd="m1les0ch5+??", SERVICE_NAME = "NEFSC_USERS")
 #  sole_con <- DBI::dbConnect(odbc::odbc(), dsn = 'sole', uid="RIGHTWHALESIGHT", pwd="m1les0ch5+??")
   
@@ -17,7 +17,7 @@ tagTable <- eventReactive(input$k, {
 
   }
   else if (input$tagtype == "bycatch"){
-    nova <- odbcConnect("nova", uid="MAMMAL_BYCATCH", pwd="pNESPP4b+??+",believeNRows=FALSE)
+    nova <- odbcConnect("nova", uid="MAMMAL_BYCATCH", pwd="xxxx",believeNRows=FALSE)
  
     sql <- paste("select tagnum1, comname, negear, year, tripid from allhauincspec where tagnum1 in ('",input$txt,"')", sep="")
     
