@@ -16,11 +16,6 @@ jobs:
         
       - name: Install rsconnect
         run: R -e "install.packages('rsconnect')"
-
-      - name: Clean and Snapshot Packrat
-        run: |
-          R -e "packrat::clean()"
-          R -e "options(rsconnect.packrat = FALSE)"
         
       - name: Write Manifest
         run: R -e "rsconnect::writeManifest(appDir = './Production')"
@@ -40,6 +35,4 @@ jobs:
           dir: |
             ./Production/
           access-type: logged_in
-          namespace: experimental-deploy
           show-logs: true
-          update-env: true
