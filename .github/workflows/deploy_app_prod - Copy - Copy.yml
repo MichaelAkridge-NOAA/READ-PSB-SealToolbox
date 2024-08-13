@@ -10,7 +10,7 @@ jobs:
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
         with:
-          url: ${{ secrets.POSIT_CONNECT_URL }}
+          url: connect.fisheries.noaa.gov
           api-key: ${{ secrets.CONNECT_API_KEY }}
           dir: ./Production/
           access-type: logged_in
