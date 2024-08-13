@@ -16,6 +16,11 @@ jobs:
         
       - name: Install rsconnect
         run: R -e "install.packages('rsconnect')"
+
+      - name: Clean and Snapshot Packrat
+        run: |
+          R -e "packrat::clean()"
+          R -e "packrat::snapshot(force = TRUE)"
         
       - name: Write Manifest
         run: R -e "rsconnect::writeManifest(appDir = './Production')"
