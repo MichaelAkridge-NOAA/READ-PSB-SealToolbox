@@ -34,7 +34,7 @@ jobs:
       - name: Deploy
         uses: rstudio/actions/connect-publish@main
         with:
-          url: "https://${{ secrets.CONNECT_SERVER_URL }}"
+          url: https://connect.fisheries.noaa.gov/
           api-key: ${{ secrets.CONNECT_API_KEY }}
           dir: "./Production/"
           access-type: logged_in
