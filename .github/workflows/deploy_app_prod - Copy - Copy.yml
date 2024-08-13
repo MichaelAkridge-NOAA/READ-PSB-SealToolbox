@@ -10,8 +10,8 @@ jobs:
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
         with:
-          url: ${{ secrets.TEST_UTL }}
-          api-key: ${{ secrets.TEST_CONNECT_API_KEY }}
+          url: ${{ secrets.POSIT_CONNECT_URL }}
+          api-key: ${{ secrets.CONNECT_API_KEY }}
           dir: ./Production/
           access-type: logged_in
           namespace: experimental-deploy
