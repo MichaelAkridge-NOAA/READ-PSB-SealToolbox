@@ -24,6 +24,14 @@ jobs:
         
       - name: Write Manifest
         run: R -e "rsconnect::writeManifest(appDir = './Production')"
+
+      - name: Commit Manifest
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add "./Production/manifest.json"
+          git commit -m "Automatically update manifest.json" || echo "No changes to commit"
+          git push
         
       - name: Deploy
         uses: rstudio/actions/connect-publish@main
@@ -35,4 +43,3 @@ jobs:
           namespace: experimental-deploy
           show-logs: true
           update-env: true
-
