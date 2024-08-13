@@ -1,0 +1,17 @@
+name: 3 Draft Deploy App to Posit Connect - PROD
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish Connect content
+        uses: rstudio/actions/connect-publish@main
+        with:
+          url: ${{ secrets.TEST_UTL }}
+          api-key: ${{ secrets.TEST_CONNECT_API_KEY }}
+          dir: ./Production/
+          access-type: logged_in
+          namespace: experimental-deploy
