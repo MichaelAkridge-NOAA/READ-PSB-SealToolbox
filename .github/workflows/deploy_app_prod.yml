@@ -20,6 +20,7 @@ jobs:
       - name: Clean and Snapshot Packrat
         run: |
           R -e "packrat::clean()"
+          R -e "options(rsconnect.packrat = FALSE)"
         
       - name: Write Manifest
         run: R -e "rsconnect::writeManifest(appDir = './Production')"
