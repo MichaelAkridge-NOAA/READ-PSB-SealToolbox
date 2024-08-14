@@ -14,9 +14,16 @@ jobs:
       - name: Install System Dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
         
+      - name: Set R Library Path
+        run: |
+          echo "R_LIBS_USER=$(Rscript -e 'cat(Sys.getenv(\"R_LIBS_USER\"))')" >> $GITHUB_ENV
+        
       - name: Set CRAN Repository and Install Leaflet
         run: |
           R -e "install.packages('leaflet', dependencies = TRUE)"
+
+      - name: Verify Leaflet Installation
+        run: R -e "if (!requireNamespace('leaflet', quietly = TRUE)) stop('Leaflet package not installed')"
         
       - name: Install Other R Packages
         run: |
@@ -54,12 +61,6 @@ jobs:
             'reticulate'
           ))"
         
-      - name: Verify Leaflet Installation
-        run: R -e "if (!requireNamespace('leaflet', quietly = TRUE)) stop('Leaflet package not installed')"
-        
-      - name: Set R Library Path
-        run: |
-          echo "R_LIBS_USER=$(Rscript -e 'cat(Sys.getenv(\"R_LIBS_USER\"))')" >> $GITHUB_ENV
         
       - name: Change Directory and Write Manifest
         run: |
