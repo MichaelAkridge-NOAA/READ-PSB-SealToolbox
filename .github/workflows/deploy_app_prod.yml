@@ -16,7 +16,6 @@ jobs:
         
       - name: Set CRAN Repository and Install Leaflet
         run: |
-          options(repos = c(CRAN = "https://cran.rstudio.com/"))
           R -e "install.packages('leaflet', dependencies = TRUE)"
         
       - name: Install Other R Packages
