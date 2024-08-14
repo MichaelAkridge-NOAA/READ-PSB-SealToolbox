@@ -50,13 +50,21 @@ jobs:
             'crosstalk',
             'xtable',
             'lubridate',
-            'tidyverse'
+            'tidyverse',
+            'reticulate'
           ))"
+        
+      - name: Verify Leaflet Installation
+        run: R -e "if (!requireNamespace('leaflet', quietly = TRUE)) stop('Leaflet package not installed')"
+        
+      - name: Set R Library Path
+        run: |
+          echo "R_LIBS_USER=$(Rscript -e 'cat(Sys.getenv(\"R_LIBS_USER\"))')" >> $GITHUB_ENV
         
       - name: Change Directory and Write Manifest
         run: |
           cd ./Production
-          R -e "rsconnect::writeManifest()"
+          R -e "rsconnect::writeManifest(lib.loc = .libPaths())"
           
       - name: Commit Manifest
         run: |
@@ -71,6 +79,6 @@ jobs:
         with:
           url: https://connect.fisheries.noaa.gov/
           api-key: ${{ secrets.CONNECT_API_KEY }}
-          dir: ./Production/
+          dir: "./Production/"
           access-type: logged_in
           show-logs: true
