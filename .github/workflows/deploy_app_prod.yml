@@ -14,11 +14,7 @@ jobs:
       - name: Install System Dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
         
-      - name: Set R Library Path
-        run: |
-          echo "R_LIBS_USER=$(Rscript -e 'cat(Sys.getenv(\"R_LIBS_USER\"))')" >> $GITHUB_ENV
-        
-      - name: Set CRAN Repository and Install Leaflet
+      - name: Install Leaflet
         run: |
           R -e "install.packages('leaflet', dependencies = TRUE)"
 
@@ -65,7 +61,7 @@ jobs:
       - name: Change Directory and Write Manifest
         run: |
           cd ./Production
-          R -e "rsconnect::writeManifest(lib.loc = .libPaths())"
+          R -e "rsconnect::writeManifest()"
           
       - name: Commit Manifest
         run: |
