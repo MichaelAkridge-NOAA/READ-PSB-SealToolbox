@@ -35,7 +35,22 @@ jobs:
             'bit64',
             'blob',
             'brew',
-            'broom'
+            'broom',
+            'shiny',
+            'shinydashboard',
+            'leaflet',
+            'leaflet.minicharts',
+            'leafpop',
+            'data.table',
+            'plyr',
+            'dplyr',
+            'htmltools',
+            'sp',
+            'sf',
+            'crosstalk',
+            'xtable',
+            'lubridate',
+            'tidyverse'
           ))"
         
       - name: Change Directory and Write Manifest
