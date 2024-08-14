@@ -14,18 +14,38 @@ jobs:
       - name: Install System Dependencies
         run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
         
-      - name: Install rsconnect
-        run: R -e "install.packages('rsconnect')"
+      - name: Install and Load rsconnect
+        run: R -e "install.packages('rsconnect'); library(rsconnect)"
+        
+      - name: Install R Packages
+        run: |
+          R -e "install.packages(c(
+            'DBI',
+            'DT',
+            'KernSmooth',
+            'MASS',
+            'Matrix',
+            'R6',
+            'RColorBrewer',
+            'Rcpp',
+            'askpass',
+            'backports',
+            'base64enc',
+            'bit',
+            'bit64',
+            'blob',
+            'brew',
+            'broom'
+          ))"
         
       - name: Change Directory and Write Manifest
         run: |
           cd ./Production
           R -e "rsconnect::writeManifest()"
-
+          
       - name: Commit Manifest
         run: |
           git config --global user.email "action@github.com"
-         
           git config --global user.name "GitHub Action"
           git add "./Production/manifest.json"
           git commit -m "Automatically update manifest.json" || echo "No changes to commit"
@@ -36,6 +56,6 @@ jobs:
         with:
           url: https://connect.fisheries.noaa.gov/
           api-key: ${{ secrets.CONNECT_API_KEY }}
-          dir: "./Production/"
+          dir: ./Production/
           access-type: logged_in
           show-logs: true
